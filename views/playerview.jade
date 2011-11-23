@@ -1,0 +1,8 @@
+li
+  img(id="player_" + player, src="data:image/gif;base64,R0lGODlhAQABAID/AP///wAAACwAAAAAAQABAAACAkQBADs=").playerview
+  div(style="text-align: center")
+    - if (player != game.owner)
+      span.yesno
+      h6= player
+    - else
+      h6 You

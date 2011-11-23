@@ -1,0 +1,18 @@
+div.container
+  div.row
+    div.twelve.columns.centered
+      h1 drawit
+        hr
+        div.row
+          div.five.columns.centered
+            div#errors
+              div.alert-box.error.name Please enter a game name
+              div.alert-box.error.image Please enter an image to draw
+              div.alert-box.error.exists This game already exists
+
+            form(method="post", action="").nice
+              label Game Name
+              input(type="text", name="name", value=session.name + '\'s Game').nice.input-text
+              label What are you drawing?
+              input(type="text", name="image").nice.input-text
+              input(type="submit", value="Click To Create Game").button.radius.nice

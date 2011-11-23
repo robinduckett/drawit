@@ -1,0 +1,8 @@
+li
+  div.game.radius(title="Click to join game", onclick="location.href='/game/" + game.id + "'")
+    h6 #{game.name}
+    span.players #{game.players} Players
+    br
+    span.games #{game.played} games played
+    - if (game.owner == session.name)
+      div.star(title="You are owner of this game")

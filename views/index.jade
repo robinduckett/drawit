@@ -1,0 +1,16 @@
+div.container
+  div.row
+    div.twelve.columns.centered
+      h1 drawit
+        hr
+        div.row
+          div.five.columns.centered
+            div#errors
+              div.alert-box.error.name Please enter a name longer than three characters.
+              div.alert-box.error.exists This player is already playing. Please choose a different name.
+              div.alert-box.error.missing Please enter a name.
+
+            form(method="post", action="").nice
+              label Name
+              input(type="text", name="name").nice.input-text
+              input(type="submit", value="Click To Play").button.radius.nice

@@ -1,0 +1,97 @@
+/* Foundation v2.1 http://foundation.zurb.com */
+/* Artfully masterminded by ZURB  */
+
+/* -------------------------------------------------- 
+   Table of Contents
+-----------------------------------------------------
+:: Shared Styles
+:: Page Name 1
+:: Page Name 2
+*/
+
+
+/* -----------------------------------------
+   Shared Styles
+----------------------------------------- */
+
+
+
+
+
+/* -----------------------------------------
+   Page Name 1
+----------------------------------------- */
+
+
+
+
+
+
+/* -----------------------------------------
+   Page Name 2
+----------------------------------------- */
+
+
+#main {
+  max-width: 100%;
+  border: 1px solid #000;
+
+}
+
+.playerview {
+  border: 1px solid #000;
+  width: 125px;
+  height: 75px;
+  margin: 0 22px;
+  margin-top: 10px;
+}
+
+span.what {
+  padding: 2px;
+  background: #FFFF33;
+}
+
+#undo {
+  margin-right: 5px;
+}
+
+.game {
+  position: relative;
+  border: 1px solid #ccc;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.game:hover {
+  border: 1px solid #000;
+  background: #000;
+  color: #fff;
+}
+
+.game:hover h6 {
+  color: #fff;
+}
+
+.game:hover span {
+  color: #ccc;
+}
+
+.game.radius {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+
+.star {
+  position: absolute;
+  right: 2px;
+  top: 2px;
+  display: block;
+  width: 16px;
+  height: 16px;
+  background-image: url(/images/star.png);
+}
+
+#errors .error {
+  display: none;
+}

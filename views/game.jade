@@ -1,0 +1,62 @@
+script(src="/socket.io/socket.io.js")
+script
+  socket = io.connect('http://localhost:3000');
+
+  socket.on('joined', function(data) {
+    $.gritter.add({
+      title: data.name + ' has joined',
+      text: 'Joining get'
+    });
+  });
+
+  socket.on('loss', function() {
+    $.gritter.add({
+      title: 'Loss!',
+      text: 'This is one you lose.'
+    });
+
+    setTimeout(function() {location.href = '/';}, 5000);
+  });
+
+  socket.on('win', function() {
+    $.gritter.add({
+      title: 'Win!',
+      text: 'You are a winner.'
+    });
+
+    setTimeout(function() {location.href = '/';}, 5000);
+  });
+
+  socket.emit('join', {game: #{game.id}});
+
+input#gameid(type="hidden", value=game.id)
+
+div.container
+  div.row
+    div.twelve.columns.centered
+      h1 drawit
+        hr
+      div.row
+        div.nine.columns
+          h4= game.name
+            small &nbsp;started by 
+            small= game.owner
+          canvas#main
+        div.three.columns
+          span#exit.button.radius.nice.red Exit to Lobby
+          p
+          h5 Score
+          p 
+            | Wins: #{session.wins}
+            br
+            | Losses: #{session.losses}
+
+          h5
+            span Draw the&nbsp;
+            span.what= game.image
+            span &nbsp;and whoever guesses closest wins the match!
+          p
+            span#undo.button.radius.white Undo
+            span#redo.button.radius.black Redo
+
+          span#finish.button.radius.nice Finish

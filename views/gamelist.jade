@@ -1,0 +1,19 @@
+div.container
+  div.row
+    div.twelve.columns.centered
+      h1 drawit - hello #{session.name}!
+      hr
+      h5 Score
+      p 
+        | Wins: #{session.wins}
+        br
+        | Losses: #{session.losses}
+      h5 Game lobby  
+      div.row
+        div.columns.twelve.centered
+          ul.five-up.block-grid
+            - for game in games
+              include gamelist/joingame
+      div.row
+        div.columns.twelve.centered
+          a(href="/create").button.nice.radius Create New Game

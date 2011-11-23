@@ -1,0 +1,82 @@
+script(src="/socket.io/socket.io.js")
+script
+  socket = io.connect('http://localhost:3000');
+
+  socket.on('path', function(data) {
+    console.log(data.data.data);
+
+    $('#player_' + data.user).css({
+      width: '125px',
+      height: '75px'
+    }).attr('src', data.data.data);
+  });
+
+  socket.on('joined', function(data) {
+    if ($('#player_' + data.name).length == 0) {
+      $('#players').append('<li><img id="player_'+data.name+'" class="playerview" /><div style="text-align: center"><span class="yesno"></span><h6>'+data.name+'</h6></div></li>');
+    }
+
+    $.gritter.add({
+      title: data.name + ' has joined',
+      text: 'Joining get'
+    });
+  });
+
+  socket.on('finished', function(data) {
+    $.gritter.add({
+      title: data.name + ' has finished',
+      text: 'SOMEONE FINISHED!'
+    });
+    $('.yesno', $('#player_' + data.name).parent()).html("<span onclick=\\"yes('"+data.name+"')\\" style=\\"padding: 9px; margin-right: 5px\\" class=\\"button radius nice\\">Declare Winner</span>");
+  });
+
+  socket.on('parted', function(data) {
+    $('#player_' + data.name).remove();
+  });
+
+  function yes(name) {
+    socket.emit('vote', {game: #{game.id}, name: name});
+
+    $.gritter.add({
+      title: 'Game has finished',
+      text: 'Goodbye!'
+    });
+
+    setTimeout(function() {
+      location.href = '/';
+    }, 3000);
+  }
+
+  socket.emit('join', {game: #{game.id}});
+
+input#gameid(type="hidden", value=game.id)
+
+div.container
+  div.row
+    div.twelve.columns.centered
+      h1 drawit
+        hr
+      div.row
+        div.nine.columns
+          h4= game.name
+            small &nbsp;started by 
+            small= game.owner
+          canvas#main
+        div.three.columns
+          span#exit.button.radius.nice.red Exit to Lobby
+          p
+          h5 Score
+          p 
+            | Wins: #{session.wins}
+            br
+            | Losses: #{session.losses}
+
+          h5
+            span Draw the&nbsp;
+            span.what= game.image
+            span &nbsp;and whoever guesses closest wins the match!
+          p
+            span#undo.button.radius.white Undo
+            span#redo.button.radius.black Redo
+
+      include preview
